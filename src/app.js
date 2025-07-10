@@ -2,17 +2,9 @@ const express = require('express')
 
 const app =  express()
 
-app.use("/admin",(req,res,next)=>{
-    const token = 'abcd'
-    const isAuthorised = token === 'abc'
-    if(!isAuthorised){
-        res.status(401).send('unauthorised')
-    }
-    else{
-        next()
-    }
+const {adminAuth} = require('./middlewares/auth')
 
-})
+app.use("/admin",adminAuth)
 
 
 app.get("/admin/getAllData",(req,res)=>{
